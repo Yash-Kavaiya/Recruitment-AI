@@ -1,0 +1,37 @@
+{
+  "jobs": [
+    {
+      "id": "1",
+      "title": "Senior Software Engineer",
+      "department": "Engineering",
+      "location": "New York, NY",
+      "type": "Full-time",
+      "experience": "5+ years",
+      "status": "Active",
+      "applicants": 24,
+      "posted": "2024-01-15"
+    },
+    {
+      "id": "2",
+      "title": "Product Manager",
+      "department": "Product",
+      "location": "San Francisco, CA",
+      "type": "Full-time",
+      "experience": "3+ years",
+      "status": "Active",
+      "applicants": 18,
+      "posted": "2024-01-20"
+    },
+    {
+      "id": "3",
+      "title": "UX Designer",
+      "department": "Design",
+      "location": "Remote",
+      "type": "Contract",
+      "experience": "2+ years",
+      "status": "Active",
+      "applicants": 32,
+      "posted": "2024-01-25"
+    }
+  ]
+}
