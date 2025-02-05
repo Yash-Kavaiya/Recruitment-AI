@@ -4,12 +4,9 @@ import { useState } from 'react';
 import { 
   ArrowLeft,
   ArrowRight,
-  Briefcase,
-  GraduationCap,
-  Clock,
   ClipboardList,
-  Building
 } from 'lucide-react';
+import GeneratedContent from './components/GeneratedContent';
 
 interface FormData {
   department: string;
@@ -34,6 +31,15 @@ export default function CreateJobDescription() {
     location: '',
     salary: ''
   });
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [generatedContent, setGeneratedContent] = useState<{
+    jobDescription: string;
+    interviewQuestions: {
+      technical: string[];
+      behavioral: string[];
+    };
+  } | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const departments = [
     'Engineering',
@@ -96,28 +102,59 @@ export default function CreateJobDescription() {
   const handleNext = () => setStep(prev => prev + 1);
   const handleBack = () => setStep(prev => prev - 1);
 
-  return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">Create Job Description</h1>
-        <p className="text-gray-600">AI-powered JD creation system</p>
-      </div>
+  const handleGenerateJD = async () => {
+    setIsGenerating(true);
+    setError(null);
 
-      <div className="bg-white rounded-xl shadow-sm p-6">
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-sm font-medium text-gray-500">Step {step} of 4</span>
-            <span className="text-sm font-medium text-blue-600">{step * 25}% Complete</span>
-          </div>
-          <div className="h-2 bg-gray-100 rounded-full">
-            <div 
-              className="h-full bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full transition-all duration-300"
-              style={{ width: `${step * 25}%` }}
-            />
-          </div>
-        </div>
+    // Validate form data
+    if (!formData.jobTitle || !formData.department || !formData.seniority || !formData.employmentType) {
+      setError('Please fill in all required fields');
+      setIsGenerating(false);
+      return;
+    }
 
-        {step === 1 && (
+    if (formData.responsibilities.length === 0 || formData.qualifications.length === 0) {
+      setError('Please select at least one responsibility and qualification');
+      setIsGenerating(false);
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/recruitment/generate-jd', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to generate job description');
+      }
+
+      if (!data.jobDescription || !data.interviewQuestions) {
+        throw new Error('Invalid response format');
+      }
+
+      setGeneratedContent({
+        jobDescription: data.jobDescription,
+        interviewQuestions: data.interviewQuestions
+      });
+      setStep(5);
+    } catch (error: any) {
+      console.error('Error generating JD:', error);
+      setError(error.message || 'Failed to generate job description. Please try again.');
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  const renderFormStep = () => {
+    switch(step) {
+      case 1:
+        return (
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -162,9 +199,9 @@ export default function CreateJobDescription() {
               </select>
             </div>
           </div>
-        )}
-
-        {step === 2 && (
+        );
+      case 2:
+        return (
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -206,9 +243,9 @@ export default function CreateJobDescription() {
               />
             </div>
           </div>
-        )}
-
-        {step === 3 && (
+        );
+      case 3:
+        return (
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -241,9 +278,9 @@ export default function CreateJobDescription() {
               </div>
             </div>
           </div>
-        )}
-
-        {step === 4 && (
+        );
+      case 4:
+        return (
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -276,10 +313,55 @@ export default function CreateJobDescription() {
               </div>
             </div>
           </div>
-        )}
+        );
+      case 5:
+        return (
+          <GeneratedContent
+            jobDescription={generatedContent?.jobDescription || ''}
+            interviewQuestions={generatedContent?.interviewQuestions || { technical: [], behavioral: [] }}
+            isLoading={isGenerating}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
+  const renderError = () => {
+    if (!error) return null;
+    return (
+      <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-6">
+        <p>{error}</p>
+      </div>
+    );
+  };
+
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-gray-800 mb-2">Create Job Description</h1>
+        <p className="text-gray-600">AI-powered JD creation system</p>
+      </div>
+
+      <div className="bg-white rounded-xl shadow-sm p-6">
+        {renderError()}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-sm font-medium text-gray-500">Step {step} of 4</span>
+            <span className="text-sm font-medium text-blue-600">{step * 25}% Complete</span>
+          </div>
+          <div className="h-2 bg-gray-100 rounded-full">
+            <div 
+              className="h-full bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full transition-all duration-300"
+              style={{ width: `${step * 25}%` }}
+            />
+          </div>
+        </div>
+
+        {renderFormStep()}
 
         <div className="flex justify-between mt-8 pt-6 border-t">
-          {step > 1 && (
+          {step > 1 && step !== 5 && (
             <button
               onClick={handleBack}
               className="px-6 py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2"
@@ -296,15 +378,16 @@ export default function CreateJobDescription() {
               Next
               <ArrowRight size={20} />
             </button>
-          ) : (
+          ) : step === 4 ? (
             <button
-              onClick={() => console.log(formData)}
-              className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-indigo-600 hover:to-blue-600 transition-all duration-300 flex items-center gap-2 ml-auto"
+              onClick={handleGenerateJD}
+              disabled={isGenerating}
+              className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-indigo-600 hover:to-blue-600 transition-all duration-300 flex items-center gap-2 ml-auto disabled:opacity-50"
             >
-              Generate JD
+              {isGenerating ? 'Generating...' : 'Generate JD'}
               <ClipboardList size={20} />
             </button>
-          )}
+          ) : null}
         </div>
       </div>
     </div>
