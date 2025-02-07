@@ -33,3 +33,20 @@ export interface CareerPath {
   }[];
   mentorAvailable: boolean;
 }
+
+export interface SkillGap {
+  id: string;
+  employeeName: string;
+  currentRole: string;
+  targetRole: string;
+  currentSkills: SkillLevel[];
+  requiredSkills: SkillLevel[];
+  completionRate: number;
+  priority: 'high' | 'medium' | 'low';
+}
+
+export interface SkillLevel {
+  name: string;
+  current: number;
+  required: number;
+}
