@@ -1,4 +1,4 @@
-import { BarChart2, Users, Settings, Home } from "lucide-react";
+import { BarChart2, Users, Settings, Home, ClipboardList, Clock, FileText } from "lucide-react";
 import Link from "next/link";
 
 export default function PerformanceLayout({
@@ -19,6 +19,9 @@ export default function PerformanceLayout({
         <nav className="space-y-2">
           <NavItem icon={BarChart2} title="Overview" href="/performance" active />
           <NavItem icon={Users} title="Team Performance" href="/performance/team" />
+          <NavItem icon={ClipboardList} title="Reviews" href="/performance/reviews" />
+          <NavItem icon={Clock} title="Timesheets" href="/performance/timesheets" />
+          <NavItem icon={FileText} title="Reports" href="/performance/reports" />
           <NavItem icon={Settings} title="Settings" href="/performance/settings" />
         </nav>
       </aside>
