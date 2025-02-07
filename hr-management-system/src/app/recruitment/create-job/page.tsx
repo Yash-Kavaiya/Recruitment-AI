@@ -337,57 +337,73 @@ export default function CreateJobDescription() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">Create Job Description</h1>
-        <p className="text-gray-600">AI-powered JD creation system</p>
-      </div>
-
-      <div className="bg-white rounded-xl shadow-sm p-6">
-        {renderError()}
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
+      <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-sm font-medium text-gray-500">Step {step} of 4</span>
-            <span className="text-sm font-medium text-blue-600">{step * 25}% Complete</span>
-          </div>
-          <div className="h-2 bg-gray-100 rounded-full">
-            <div 
-              className="h-full bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full transition-all duration-300"
-              style={{ width: `${step * 25}%` }}
-            />
-          </div>
+          <h1 className="text-3xl font-bold text-gray-100 mb-2">Create Job Description</h1>
+          <p className="text-gray-400">AI-powered JD creation system</p>
         </div>
 
-        {renderFormStep()}
+        <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl shadow-lg p-6 border border-gray-700">
+          {renderError()}
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-sm font-medium text-gray-400">Step {step} of 4</span>
+              <span className="text-sm font-medium text-blue-400">{step * 25}% Complete</span>
+            </div>
+            <div className="h-2 bg-gray-700 rounded-full">
+              <div 
+                className="h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full transition-all duration-300"
+                style={{ width: `${step * 25}%` }}
+              />
+            </div>
+          </div>
 
-        <div className="flex justify-between mt-8 pt-6 border-t">
-          {step > 1 && step !== 5 && (
-            <button
-              onClick={handleBack}
-              className="px-6 py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2"
-            >
-              <ArrowLeft size={20} />
-              Back
-            </button>
-          )}
-          {step < 4 ? (
-            <button
-              onClick={handleNext}
-              className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-indigo-600 hover:to-blue-600 transition-all duration-300 flex items-center gap-2 ml-auto"
-            >
-              Next
-              <ArrowRight size={20} />
-            </button>
-          ) : step === 4 ? (
-            <button
-              onClick={handleGenerateJD}
-              disabled={isGenerating}
-              className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-indigo-600 hover:to-blue-600 transition-all duration-300 flex items-center gap-2 ml-auto disabled:opacity-50"
-            >
-              {isGenerating ? 'Generating...' : 'Generate JD'}
-              <ClipboardList size={20} />
-            </button>
-          ) : null}
+          <div className="space-y-6">
+            {/* Update input and select styles */}
+            <style jsx global>{`
+              input, select {
+                @apply bg-gray-800 border-gray-700 text-gray-100 !important;
+              }
+              input::placeholder {
+                @apply text-gray-500 !important;
+              }
+              .checkbox-label {
+                @apply bg-gray-800 border-gray-700 hover:bg-gray-700 text-gray-300 !important;
+              }
+            `}</style>
+            {renderFormStep()}
+          </div>
+
+          <div className="flex justify-between mt-8 pt-6 border-t border-gray-700">
+            {step > 1 && step !== 5 && (
+              <button
+                onClick={handleBack}
+                className="px-6 py-2.5 border border-gray-600 rounded-lg hover:bg-gray-700 transition-colors flex items-center gap-2 text-gray-300"
+              >
+                <ArrowLeft size={20} />
+                Back
+              </button>
+            )}
+            {step < 4 ? (
+              <button
+                onClick={handleNext}
+                className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-purple-600 hover:to-blue-600 transition-all duration-300 flex items-center gap-2 ml-auto"
+              >
+                Next
+                <ArrowRight size={20} />
+              </button>
+            ) : step === 4 ? (
+              <button
+                onClick={handleGenerateJD}
+                disabled={isGenerating}
+                className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-purple-600 hover:to-blue-600 transition-all duration-300 flex items-center gap-2 ml-auto disabled:opacity-50"
+              >
+                {isGenerating ? 'Generating...' : 'Generate JD'}
+                <ClipboardList size={20} />
+              </button>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>
