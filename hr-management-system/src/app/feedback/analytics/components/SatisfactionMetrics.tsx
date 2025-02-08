@@ -11,13 +11,24 @@ const mockData = {
     { name: "Work Environment", score: 4.2, responses: 156 },
     { name: "Management Support", score: 3.8, responses: 142 },
     { name: "Career Growth", score: 4.0, responses: 138 },
-    { name: "Work-Life Balance", score: 3.9, responses: 145 }
+    { name: "Work-Life Balance", score: 3.9, responses: 145 },
+    { name: "Team Collaboration", score: 4.3, responses: 150 },
+    { name: "Company Culture", score: 4.1, responses: 160 },
+    { name: "Benefits & Compensation", score: 3.7, responses: 155 },
+    { name: "Professional Development", score: 4.0, responses: 140 }
   ],
   trends: {
     positive: 65,
     neutral: 25,
     negative: 10
-  }
+  },
+  monthlyTrend: [
+    { month: "Jan", score: 82 },
+    { month: "Feb", score: 84 },
+    { month: "Mar", score: 85 },
+    { month: "Apr", score: 83 },
+    { month: "May", score: 85 }
+  ]
 };
 
 export default function SatisfactionMetrics({ timeframe }: SatisfactionMetricsProps) {

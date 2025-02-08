@@ -36,7 +36,186 @@ const mockRequests: HRRequest[] = [
     dateSubmitted: "2024-02-19",
     description: "Early performance review request for promotion consideration"
   },
-  // Add more mock data as needed
+  {
+    id: "HR003",
+    employeeName: "Michael Chen",
+    department: "Sales",
+    requestType: "Salary Review",
+    status: "approved",
+    priority: "medium",
+    dateSubmitted: "2024-02-18",
+    description: "Annual salary review request"
+  },
+  {
+    id: "HR004",
+    employeeName: "Sarah Johnson",
+    department: "HR",
+    requestType: "Training Request",
+    status: "pending",
+    priority: "low",
+    dateSubmitted: "2024-02-17",
+    description: "Leadership development program application"
+  },
+  {
+    id: "HR005",
+    employeeName: "David Williams",
+    department: "Finance",
+    requestType: "Grievance",
+    status: "in-review",
+    priority: "high",
+    dateSubmitted: "2024-02-16",
+    description: "Workplace environment concern"
+  },
+  {
+    id: "HR006",
+    employeeName: "Emily Brown",
+    department: "Engineering",
+    requestType: "Remote Work",
+    status: "rejected",
+    priority: "medium",
+    dateSubmitted: "2024-02-15",
+    description: "Request for permanent remote work arrangement"
+  },
+  {
+    id: "HR007",
+    employeeName: "James Wilson",
+    department: "Marketing",
+    requestType: "Benefits Query",
+    status: "approved",
+    priority: "low",
+    dateSubmitted: "2024-02-14",
+    description: "Healthcare benefits clarification"
+  },
+  {
+    id: "HR008",
+    employeeName: "Lisa Anderson",
+    department: "Sales",
+    requestType: "Transfer",
+    status: "pending",
+    priority: "high",
+    dateSubmitted: "2024-02-13",
+    description: "Department transfer request"
+  },
+  {
+    id: "HR009",
+    employeeName: "Robert Martinez",
+    department: "IT",
+    requestType: "Equipment",
+    status: "approved",
+    priority: "medium",
+    dateSubmitted: "2024-02-12",
+    description: "New laptop request"
+  },
+  {
+    id: "HR010",
+    employeeName: "Rachel Lee",
+    department: "Finance",
+    requestType: "Leave",
+    status: "in-review",
+    priority: "low",
+    dateSubmitted: "2024-02-11",
+    description: "Sabbatical leave request"
+  },
+  {
+    id: "HR011",
+    employeeName: "Thomas Garcia",
+    department: "Engineering",
+    requestType: "Certification",
+    status: "approved",
+    priority: "medium",
+    dateSubmitted: "2024-02-10",
+    description: "AWS certification program request"
+  },
+  {
+    id: "HR012",
+    employeeName: "Amanda White",
+    department: "HR",
+    requestType: "Complaint",
+    status: "in-review",
+    priority: "high",
+    dateSubmitted: "2024-02-09",
+    description: "Workplace harassment report"
+  },
+  {
+    id: "HR013",
+    employeeName: "Kevin Taylor",
+    department: "Marketing",
+    requestType: "Promotion",
+    status: "pending",
+    priority: "high",
+    dateSubmitted: "2024-02-08",
+    description: "Senior position application"
+  },
+  {
+    id: "HR014",
+    employeeName: "Maria Rodriguez",
+    department: "Sales",
+    requestType: "Compensation",
+    status: "rejected",
+    priority: "medium",
+    dateSubmitted: "2024-02-07",
+    description: "Commission structure review"
+  },
+  {
+    id: "HR015",
+    employeeName: "Daniel Kim",
+    department: "IT",
+    requestType: "Training",
+    status: "approved",
+    priority: "low",
+    dateSubmitted: "2024-02-06",
+    description: "Security certification course request"
+  },
+  {
+    id: "HR016",
+    employeeName: "Jennifer Moore",
+    department: "Finance",
+    requestType: "Flexible Hours",
+    status: "pending",
+    priority: "medium",
+    dateSubmitted: "2024-02-05",
+    description: "Modified work schedule request"
+  },
+  {
+    id: "HR017",
+    employeeName: "Christopher Lee",
+    department: "Engineering",
+    requestType: "Equipment",
+    status: "approved",
+    priority: "low",
+    dateSubmitted: "2024-02-04",
+    description: "Standing desk request"
+  },
+  {
+    id: "HR018",
+    employeeName: "Michelle Chang",
+    department: "Marketing",
+    requestType: "Leave",
+    status: "in-review",
+    priority: "medium",
+    dateSubmitted: "2024-02-03",
+    description: "Maternity leave application"
+  },
+  {
+    id: "HR019",
+    employeeName: "Ryan Peters",
+    department: "Sales",
+    requestType: "Benefits",
+    status: "approved",
+    priority: "low",
+    dateSubmitted: "2024-02-02",
+    description: "401k contribution change"
+  },
+  {
+    id: "HR020",
+    employeeName: "Jessica Wong",
+    department: "IT",
+    requestType: "Remote Work",
+    status: "pending",
+    priority: "high",
+    dateSubmitted: "2024-02-01",
+    description: "Hybrid work schedule request"
+  }
 ];
 
 export default function HRDeskPage() {
