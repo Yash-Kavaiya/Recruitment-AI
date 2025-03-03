@@ -1,9 +1,9 @@
-
-
-
-
-
-
-
-
-}  }    }      "@/*": ["./src/*"]    "paths": {    "baseUrl": ".",  "compilerOptions": {{
+{
+    "compilerOptions": {
+      // Other options...
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["./src/*"]
+      }
+    }
+  }
